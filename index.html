@@ -6,10 +6,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{font-family:Arial;background:#f2f2f2;margin:0}
-.box{max-width:400px;margin:30px auto;background:white;padding:20px;border-radius:10px;text-align:center}
-button{width:100%;padding:14px;background:#00b050;color:white;border:none;font-size:18px;border-radius:6px}
-.popup{position:fixed;bottom:20px;left:10px;background:white;padding:10px;border-radius:6px;box-shadow:0 0 5px}
-.sticky{position:fixed;bottom:0;width:100%;background:#00b050;color:white;padding:12px;text-align:center}
+.box{
+  max-width:400px;
+  margin:30px auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+button{
+  width:100%;
+  padding:14px;
+  background:#00b050;
+  color:white;
+  border:none;
+  font-size:18px;
+  border-radius:6px;
+  cursor:pointer;
+}
+button:hover{
+  background:#009940;
+  transform:scale(1.05);
+  transition:0.2s;
+}
+img:hover{
+  transform:scale(1.02);
+  transition:0.3s;
+}
+.popup{
+  position:fixed;
+  bottom:20px;
+  left:10px;
+  background:white;
+  padding:10px;
+  border-radius:6px;
+  box-shadow:0 0 5px;
+  animation:fadeInOut 4s infinite;
+}
+@keyframes fadeInOut {
+  0%,100% {opacity:0;}
+  50% {opacity:1;}
+}
+.sticky{position:fixed;bottom:0;width:100%;background:#00b050;color:white;padding:12px;text-align:center;cursor:pointer}
 </style>
 </head>
 
@@ -26,16 +65,17 @@ button{width:100%;padding:14px;background:#00b050;color:white;border:none;font-s
 
 <br><br>
 
-<button onclick="goSurvey()">📝 ENTER SURVEY</button>
+<button onclick="goSurvey()">📝 Enter Now & Claim $25+</button>
 
 <script>
 function goSurvey(){
-var a = document.getElementById("clicksound");
-a.play().catch(()=>{});
-setTimeout(next,300);
+  var a = document.getElementById("clicksound");
+  a.play().catch(()=>{});
+  setTimeout(next,300);
 }
 </script>  
-<p>Only 5 Slots Left</p>
+
+<p style="color:#d00000;font-weight:bold;">Only 5 Slots Left – Claim Yours!</p>
 </div>
 
 <div class="sticky" onclick="next()">Continue ➜</div>
