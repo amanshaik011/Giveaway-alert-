@@ -49,6 +49,26 @@ img:hover{
   50% {opacity:1;}
 }
 .sticky{position:fixed;bottom:0;width:100%;background:#00b050;color:white;padding:12px;text-align:center;cursor:pointer}
+
+/* Progress bar */
+#progressContainer{
+  width:100%;
+  background:#ccc;
+  border-radius:10px;
+  height:12px;
+  margin:10px 0;
+}
+#progressBar{
+  width:0%;
+  height:100%;
+  background:#00b050;
+  border-radius:10px;
+  transition:width 0.3s;
+}
+#progressText{
+  font-weight:bold;
+  margin-bottom:5px;
+}
 </style>
 </head>
 
@@ -65,15 +85,13 @@ img:hover{
 
 <br><br>
 
-<button onclick="goSurvey()">📝 Enter Now & Claim $25+</button>
+<button onclick="startSurvey()">📝 Enter Now & Claim $25+</button>
 
-<script>
-function goSurvey(){
-  var a = document.getElementById("clicksound");
-  a.play().catch(()=>{});
-  setTimeout(next,300);
-}
-</script>  
+<!-- Fake survey / progress bar -->
+<div id="progressText" style="display:none;">3 questions left...</div>
+<div id="progressContainer" style="display:none;">
+  <div id="progressBar"></div>
+</div>
 
 <p style="color:#d00000;font-weight:bold;">Only 5 Slots Left – Claim Yours!</p>
 </div>
@@ -101,8 +119,30 @@ setInterval(()=>{
 document.getElementById("pop").innerHTML=names[Math.floor(Math.random()*5)]+" just signed up!";
 },4000);
 
+// ===== Survey / Progress Bar Logic =====
+function startSurvey(){
+  var a = document.getElementById("clicksound");
+  a.play().catch(()=>{});
+  
+  // Show fake survey bar
+  document.getElementById("progressText").style.display="block";
+  document.getElementById("progressContainer").style.display="block";
+  
+  let step=0;
+  let textArr=["3 questions left...","2 questions left...","1 question left..."];
+  let bar=document.getElementById("progressBar");
+  let txt=document.getElementById("progressText");
+  
+  let interval=setInterval(()=>{
+    step++;
+    bar.style.width=(step*33)+"%";
+    txt.innerText=textArr[Math.min(step-1,2)];
+    if(step>=3){clearInterval(interval); next();}
+  },500); // 0.5s per step
+}
+
 function next(){
-window.location="spinner.html";
+  window.location="spinner.html";
 }
 
 // Save links
