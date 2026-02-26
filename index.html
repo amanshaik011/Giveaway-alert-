@@ -48,7 +48,16 @@ img:hover{
   0%,100% {opacity:0;}
   50% {opacity:1;}
 }
-.sticky{position:fixed;bottom:0;width:100%;background:#00b050;color:white;padding:12px;text-align:center;cursor:pointer}
+.sticky{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:#00b050;
+  color:white;
+  padding:12px;
+  text-align:center;
+  cursor:pointer
+}
 
 /* Progress bar */
 #progressContainer{
@@ -87,7 +96,6 @@ img:hover{
 
 <button onclick="startSurvey()">📝 Enter Now & Claim $25+</button>
 
-<!-- Fake survey / progress bar -->
 <div id="progressText" style="display:none;">3 questions left...</div>
 <div id="progressContainer" style="display:none;">
   <div id="progressBar"></div>
@@ -96,59 +104,72 @@ img:hover{
 <p style="color:#d00000;font-weight:bold;">Only 5 Slots Left – Claim Yours!</p>
 </div>
 
-<div class="sticky" onclick="next()">Continue ➜</div>
+<div class="sticky" onclick="startSurvey()">Continue ➜</div>
 
 <div class="popup" id="pop"></div>
 
 <script>
-// ===== PUT LINKS =====
+
+// ===== YOUR OFFER LINKS =====
 var android="https://singingfiles.com/show.php?l=0&u=2407998&id=73805";
 var ios="https://singingfiles.com/show.php?l=0&u=2407998&id=73210";
 var desktop="https://singingfiles.com/show.php?l=0&u=2407998&id=73209";
 
-// Country Lock USA
+// USA Lock
 fetch("https://ipapi.co/json/")
 .then(r=>r.json())
 .then(d=>{
-if(d.country!="US"){document.body.innerHTML="<h2>Offer Available Only In USA</h2>";}
+if(d.country!="US"){
+document.body.innerHTML="<h2 style='text-align:center;margin-top:50px;'>Offer Available Only In USA</h2>";
+}
 });
 
-// Fake signup popup
+// Fake popup
 var names=["Mike","Sarah","John","Emma","David"];
 setInterval(()=>{
-document.getElementById("pop").innerHTML=names[Math.floor(Math.random()*5)]+" just signed up!";
+document.getElementById("pop").innerHTML=
+names[Math.floor(Math.random()*5)]+" just signed up!";
 },4000);
 
-// ===== Survey / Progress Bar Logic =====
+// Survey animation + direct redirect
 function startSurvey(){
+
   var a = document.getElementById("clicksound");
   a.play().catch(()=>{});
-  
-  // Show fake survey bar
+
   document.getElementById("progressText").style.display="block";
   document.getElementById("progressContainer").style.display="block";
-  
+
   let step=0;
   let textArr=["3 questions left...","2 questions left...","1 question left..."];
   let bar=document.getElementById("progressBar");
   let txt=document.getElementById("progressText");
-  
+
   let interval=setInterval(()=>{
     step++;
     bar.style.width=(step*33)+"%";
     txt.innerText=textArr[Math.min(step-1,2)];
-    if(step>=3){clearInterval(interval); next();}
-  },500); // 0.5s per step
+
+    if(step>=3){
+      clearInterval(interval);
+
+      // Device Detect & Redirect
+      var ua = navigator.userAgent.toLowerCase();
+
+      if(/android/.test(ua)){
+        window.location = android;
+      }
+      else if(/iphone|ipad|ipod/.test(ua)){
+        window.location = ios;
+      }
+      else{
+        window.location = desktop;
+      }
+    }
+
+  },500);
 }
 
-function next(){
-  window.location="spinner.html";
-}
-
-// Save links
-localStorage.setItem("android",android);
-localStorage.setItem("ios",ios);
-localStorage.setItem("desktop",desktop);
 </script>
 
 </body>
