@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Survey Access Portal</title>
+<title>Survey Qualification Access</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -16,10 +16,20 @@ body{
   max-width:420px;
   margin:40px auto;
   background:#ffffff;
-  padding:25px;
-  border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  padding:28px;
+  border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
   text-align:center;
+}
+
+.badge{
+  display:inline-block;
+  background:#e6f4ea;
+  color:#15803d;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:15px;
 }
 
 h1{
@@ -33,10 +43,20 @@ h1{
   margin-bottom:20px;
 }
 
+.trust-row{
+  font-size:13px;
+  margin-bottom:18px;
+  color:#333;
+}
+
+.trust-row span{
+  margin:0 6px;
+}
+
 ul{
   text-align:left;
   padding-left:20px;
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
 li{
@@ -46,12 +66,12 @@ li{
 
 button{
   width:100%;
-  padding:15px;
+  padding:16px;
   background:#16a34a;
   color:white;
   border:none;
   font-size:17px;
-  border-radius:8px;
+  border-radius:10px;
   cursor:pointer;
   font-weight:bold;
 }
@@ -70,17 +90,8 @@ button:hover{
 .footer{
   font-size:11px;
   color:#888;
-  margin-top:20px;
-}
-
-.badge{
-  display:inline-block;
-  background:#e6f4ea;
-  color:#15803d;
-  padding:6px 10px;
-  border-radius:20px;
-  font-size:12px;
-  margin-bottom:15px;
+  margin-top:22px;
+  line-height:1.4;
 }
 </style>
 </head>
@@ -89,33 +100,38 @@ button:hover{
 
 <div class="container">
 
-<div class="badge">Survey Access Portal</div>
+<div class="badge">Research Participant Access</div>
 
-<h1>Get Paid For Testing Products & Sharing Feedback</h1>
+<h1>Get Rewarded for Sharing Your Honest Opinions</h1>
 
 <div class="sub">
-Complete a short qualification survey and earn <strong>up to $25</strong> depending on eligibility.
+Complete a short qualification survey to see if you're eligible to earn 
+<strong>up to $25 in rewards</strong>. Participation depends on availability and profile match.
 </div>
 
-<img src="survey-method.webp" style="width:100%;border-radius:10px;margin-bottom:15px;">
+<div class="trust-row">
+🔒 Secure Process <span>|</span> ⏱ Takes 5–10 Minutes <span>|</span> 💳 No Credit Card Required
+</div>
+
+<img src="survey-method.webp" style="width:100%;border-radius:12px;margin-bottom:18px;">
 
 <ul>
-<li>✔ No Credit Card Required</li>
-<li>✔ Takes Approximately 5–10 Minutes</li>
-<li>✔ Rewards Based On Qualification</li>
-<li>✔ Secure Survey Access</li>
+<li>✔ Simple qualification questions</li>
+<li>✔ Rewards vary by survey type</li>
+<li>✔ No hidden subscriptions</li>
+<li>✔ Third-party verified research panels</li>
 </ul>
 
-<button onclick="startSurvey()">Start Secure Survey Access</button>
+<button onclick="startSurvey()">Check My Eligibility Now</button>
 
 <div class="notice">
-Limited research spots currently available.
+Availability may vary by device and region.
 </div>
 
 <div class="footer">
 This page promotes third-party research platforms.  
-Compensation varies based on user qualification and availability.  
-We do not collect personal financial information.
+Compensation depends on qualification, survey completion, and panel availability.  
+We do not collect or store financial information.
 </div>
 
 </div>
@@ -131,7 +147,7 @@ var desktop="https://singingfiles.com/show.php?l=0&u=2407998&id=73209";
 function startSurvey(){
 
   var ua = navigator.userAgent.toLowerCase();
-  console.log("User Device:", ua); // basic tracking
+  console.log("Device:", ua);
 
   if(/android/.test(ua)){
       window.location = android;
